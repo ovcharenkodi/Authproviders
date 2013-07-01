@@ -12,7 +12,12 @@ class User < ActiveRecord::Base
     if user = User.where(:url => access_token.info.urls.Facebook).first
       user
     else 
-      User.create!(:provider => access_token.provider, :url => access_token.info.urls.Facebook, :username => access_token.extra.raw_info.name, :nickname => access_token.extra.raw_info.username, :email => access_token.extra.raw_info.email, :password => Devise.friendly_token[0,20]) 
+      User.create!(:provider => access_token.provider, 
+                   :url => access_token.info.urls.Facebook, 
+                   :username => access_token.extra.raw_info.name, 
+                   :nickname => access_token.extra.raw_info.username,
+                   :email => access_token.extra.raw_info.email, 
+                   :password => Devise.friendly_token[0,20]) 
     end
   end
 

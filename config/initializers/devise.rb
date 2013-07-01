@@ -2,8 +2,10 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  config.omniauth :facebook, 'APP_ID', 'APP_SECRET'
-  config.omniauth :vkontakte, 'APP_ID', 'APP_SECRET'
+  config.omniauth :facebook, '388856701235432', 'e25925f5b3737ad3d8c53392ecdba599',
+                  :scope => 'read_friendlists'
+
+  config.omniauth :vkontakte, '3730969', '3lhVk32nGJe64z2hxBG5'
   # ==> Mailer Configuration
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

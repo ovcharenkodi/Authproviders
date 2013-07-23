@@ -6,16 +6,18 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :nickname, :provider, :url, :username
+  attr_accessible :nickname, :provider, :url, :username, :token
 
   def self.find_for_facebook_oauth access_token
     if user = User.where(:url => access_token.info.urls.Facebook).first
+      user.token = access_token["credentials"]["token"] 
       user
     else 
       User.create!(:provider => access_token.provider, 
                    :url => access_token.info.urls.Facebook, 
                    :username => access_token.extra.raw_info.name, 
                    :nickname => access_token.extra.raw_info.username,
+                   :token => access_token.credentials.token,
                    :email => access_token.extra.raw_info.email, 
                    :password => Devise.friendly_token[0,20]) 
     end
@@ -34,9 +36,18 @@ class User < ActiveRecord::Base
     end
   end
 
- def self.getfriends
+ def getfriends
+    # user = FbGraph::User.fetch('dmitry.ovcharenko.7') 
+   friends =[]
+   if self.provider == "facebook"
+     user = FbGraph::User.me(self.token)
+     user.friends.each do |f| 
+       friends << f.name
+     end
+   else 
+     # get friends from vk  
+   end  
+   friends
  end
-
-
-  
+ 
 end

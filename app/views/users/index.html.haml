@@ -6,8 +6,9 @@
       %th= model_class.human_attribute_name(:username)
       %th= model_class.human_attribute_name(:nickname)
       %th= model_class.human_attribute_name(:provider)
-      %th= model_class.human_attribute_name(:sign_in_count)
-      %th= model_class.human_attribute_name(:created_at)
+      / %th= model_class.human_attribute_name(:token)
+      / %th= model_class.human_attribute_name(:sign_in_count)
+      / %th= model_class.human_attribute_name(:created_at)
       / %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @users.each do |user|
@@ -15,7 +16,8 @@
         %td= link_to user.username, user.url
         %td= user.nickname
         %td= user.provider
-        %td= user.sign_in_count
-        %td= user.created_at
+        / %td= user.token
+        / %td= user.sign_in_count
+        / %td= user.created_at
         %td
           = link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete,   :class => 'btn btn-mini btn-danger'

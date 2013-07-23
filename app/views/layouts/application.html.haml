@@ -32,20 +32,21 @@
     .content
       .row
         - if user_signed_in?
-          .span2
-            .ul{:class => "nav nav-list"}
-              .li{:class => "nav-header"}="#{current_user.username}"
-              -current_user.methods.each do |m|
+          .span3.sidebar-nav
+            %ul.nav.nav-list
+              %li.nav-header="#{current_user.username} friends:"
+              -current_user.getfriends.each do |m|
                 .li=m
         .span6
           = yield
         .span3
-          .well.sidebar-nav
-            %h3 Providers
-            %ul.nav.nav-list
-              - if !user_signed_in?
-                %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-                %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
+          - unless user_signed_in?
+            .well.sidebar-nav
+              %h3 Providers
+              %ul.nav.nav-list
+                - if !user_signed_in?
+                  %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+                  %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
 
     
       %footer

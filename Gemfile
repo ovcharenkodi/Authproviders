@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'sqlite3', :group => :development
+
+gem 'vkontakte_api', '~> 1.2'
+
 #gem 'pg', :group => :production
 group :production do
   gem 'pg'

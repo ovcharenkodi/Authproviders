@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   def self.find_for_vkontakte_oauth access_token
     puts "-----------------------------------------------+++++++"
     puts access_token
-    
+
     if user = User.where(:url => access_token.info.urls.Vkontakte).first
       user.token = access_token.credentials.token
       user
@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   end
 
  def getfriends
-    # user = FbGraph::User.fetch('dmitry.ovcharenko.7') 
    friends =[]
    if self.provider == "facebook"
      user = FbGraph::User.me(self.token)
@@ -50,7 +49,10 @@ class User < ActiveRecord::Base
        friends << f.name
      end
    else 
-     # get friends from vk  
+     vk = VkontakteApi::Client.new(self.token)
+     vk.friends.get(fields: [:first_name, :last_name]).each do |f|
+       friends << "#{f.first_name} #{f.last_name}"  
+     end
    end  
    friends
  end

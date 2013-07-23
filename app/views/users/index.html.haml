@@ -4,7 +4,7 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:username)
-      %th= model_class.human_attribute_name(:nickname)
+      / %th= model_class.human_attribute_name(:nickname)
       %th= model_class.human_attribute_name(:provider)
       / %th= model_class.human_attribute_name(:token)
       / %th= model_class.human_attribute_name(:sign_in_count)
@@ -14,7 +14,7 @@
     - @users.each do |user|
       %tr
         %td= link_to user.username, user.url
-        %td= user.nickname
+        / %td= user.nickname
         %td= user.provider
         / %td= user.token
         / %td= user.sign_in_count

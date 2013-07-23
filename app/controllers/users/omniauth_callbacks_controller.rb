@@ -3,11 +3,12 @@ class Users::OmniauthCallbacksController < ApplicationController
     @user = User.find_for_facebook_oauth request.env["omniauth.auth"]
 
 
-    # puts "--------------------------------------------------------------------------"
+    puts "--------------------------------------------------------------------------"
     # # puts request.env["omniauth.auth"]
      
     #  puts request.env["omniauth.auth"]["uid"] 
-    #  puts request.env["omniauth.auth"]["credentials"]["token"]
+     puts request.env["omniauth.auth"]["credentials"]["token"]
+     puts request.env["omniauth.auth"]["credentials"]["expires_at"]  
 
     # puts "----------------------------------------------------------------------------"
 
@@ -22,6 +23,7 @@ class Users::OmniauthCallbacksController < ApplicationController
       redirect_to root_path
     end
   end
+
 
   def vkontakte
   	@user = User.find_for_vkontakte_oauth request.env["omniauth.auth"]

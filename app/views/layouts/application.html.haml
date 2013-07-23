@@ -28,20 +28,25 @@
               - if user_signed_in?
                 %li= link_to "#{current_user.username} (#{current_user.provider})", current_user.url
                 %li= link_to "Sign out", destroy_user_session_path, :method => :delete
+  .container
+    .content
+      .row
+        - if user_signed_in?
+          .span2
+            .ul{:class => "nav nav-list"}
+              .li{:class => "nav-header"}="#{current_user.username}"
+              -current_user.methods.each do |m|
+                .li=m
+        .span6
+          = yield
+        .span3
+          .well.sidebar-nav
+            %h3 Providers
+            %ul.nav.nav-list
+              - if !user_signed_in?
+                %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+                %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
 
-    .container
-
-      .content
-        .row
-          .span9
-            = yield
-          .span3
-            .well.sidebar-nav
-              %h3 Providers
-              %ul.nav.nav-list
-                - if !user_signed_in?
-                  %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-                  %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
     
       %footer
         %p

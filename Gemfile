@@ -1,11 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.13'
 gem 'sqlite3', :group => :development
 #gem 'pg', :group => :production
 group :production do
   gem 'pg'
 end
+
+gem 'execjs'
+gem 'therubyracer'
+gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails'
 
 
 group :assets do
@@ -14,6 +19,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'fb_graph'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
@@ -21,3 +27,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+
+
+
+# user = FbGraph::User.fetch('dmitry.ovcharenko.7') 
